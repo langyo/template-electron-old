@@ -1,18 +1,11 @@
-import { connect } from 'react-redux'
+export default {
+  mapStateToProps: (state) => {
+    return {
+      ...state.pages.picker,
+      open: state.views.drawer.show === ''
+    };
+  },
 
-import Picker from '../../components/pages/picker';
-
-const mapStateToProps = (state) => {
-  return {
-    ...state.pages.picker,
-    open: state.views.drawer.show === ''
-  };
+  mapDispatchToProps: (dispatch, ownProps) => ({
+  })
 }
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Picker);

@@ -13,10 +13,14 @@ import SettingDialog from '../../containers/dialog/setting';
 import Fab from '../../containers/views/fab';
 import Drawer from '../../containers/views/drawer';
 
-const requirePageFunc = require.context('../pages', true, /\.js$/);
-let pages = {};
+import { connect } from 'react-redux';
 
-requirePageFunc.keys().forEach(key => {
+const requireComponentsFunc = require.context('../pages', true, /\.js$/);
+let components =  {};
+const requireContainersFunc = require.context('../../containers/pages', true, /\.js$/);
+let containers = {};
+
+requireComponentsFunc.keys().forEach(key => {
   let path = /^\.\/(.*)\.js$/.exec(key)[1].split('/');
   const dfs = obj => {
     let head = path.shift();
@@ -24,12 +28,33 @@ requirePageFunc.keys().forEach(key => {
       if (obj[head]) obj[head] = dfs(obj[head]);
       else obj[head] = dfs({});
     } else {
-      obj[head] = requirePageFunc(key);
+      obj[head] = requireComponentsFunc(key);
     }
     return obj;
   }
-  pages = dfs(pages);
+  components = dfs(components);
 });
+
+requireContainersFunc.keys().forEach(key => {
+  let path = /^\.\/(.*)\.js$/.exec(key)[1].split('/');
+  const dfs = obj => {
+    let head = path.shift();
+    if (path.length > 0) {
+      if (obj[head]) obj[head] = dfs(obj[head]);
+      else obj[head] = dfs({});
+    } else {
+      obj[head] = requireContainersFunc(key);
+    }
+    return obj;
+  }
+  containers = dfs(containers);
+});
+
+let pages = {};
+Object.keys(containers).forEach(key => 
+  pages[key] = connect(containers[key].mapStateToProps, containers[key].mapDispatchToProps)
+  (components[key].default)
+);
 
 const styles = theme => ({
   main: {
@@ -71,7 +96,7 @@ class Main extends React.Component {
           <Drawer />
           {/* Pages */}
           <div className={classes.main}>
-            {pages[this.props.page].default}
+            {React.createElement(pages[this.props.page])}
           </div>
         </MuiThemeProvider>
       </Window>

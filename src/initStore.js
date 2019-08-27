@@ -1,7 +1,7 @@
 export default {
   views: {
     drawer: {
-      show: '',
+      show: 'main',
       open: false
     },
     dialog: {
