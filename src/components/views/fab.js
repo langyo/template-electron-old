@@ -6,7 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
 
-import MenuIcon from 'mdi-material-ui/Menu';
+import Icon from '@mdi/react';
+import { mdiMenu } from '@mdi/js';
 
 const styles = theme => ({
   menuButton: {
@@ -35,7 +36,7 @@ class MainAppbar extends React.Component {
           onClick={this.props.onToggleDrawer}
           className={classes.menuButton}
         >
-          <MenuIcon />
+          <Icon path={mdiMenu} size={1} />
         </IconButton>
       </div>
     )

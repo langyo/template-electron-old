@@ -2,9 +2,12 @@ import { connect } from 'react-redux'
 
 import Drawer from '../../components/views/drawer';
 
+import config from '../../configs/drawer';
+
 const mapStateToProps = (state) => {
   return {
-    ...state.views.drawer
+    ...state.views.drawer,
+    items: config(state)
   };
 };
 

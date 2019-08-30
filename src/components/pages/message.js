@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
 });
 
-class Message extends React.Component {
+class Main extends React.Component {
   static propTypes = {
     // State
     open: PropTypes.bool
@@ -25,7 +25,7 @@ class Message extends React.Component {
         <div>
           <Paper>
             <Typography variant='h3'>
-              {'Hello world!'}
+              {'Message'}
             </Typography>
           </Paper>
         </div>
@@ -34,4 +34,4 @@ class Message extends React.Component {
   }
 }
 
-export default withStyles(styles)(Message);
+export default withStyles(styles)(Main);

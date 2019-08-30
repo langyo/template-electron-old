@@ -1,4 +1,4 @@
-import initStore from './initStore';
+import initStore from './configs/initStore';
 
 const requireFunc = require.context('./reducers', true, /\.js$/);
 let reducers = {};

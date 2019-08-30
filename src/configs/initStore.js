@@ -30,17 +30,11 @@ export default {
       database: 'loading'
     }
   },
-  database: {
-    accounts: {},
-    classes: {},
-    broadcast: {
-      broadcasts: [
-        {
-          title: 'TEST',
-          date: '未知日期',
-          description: '123\n233\n333'
-        }
-      ]
+  data: {
+    account: {
+      hasLogin: false,
+      name: '',
+      level: ''
     }
   },
   pages: {
