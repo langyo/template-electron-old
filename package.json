@@ -14,6 +14,7 @@
   "homepage": "https://github.com/langyo/kelp#readme",
   "scripts": {
     "start": "electron ./server/index.js",
+    "start:dev": "electron ./server/index.js --dev",
     "watch": "webpack-dev-server --config ./webpack.config.js",
     "build": "webpack --config ./webpack.config.js",
     "package": "electron-packager ./ ReactDesktop --all --overwrite --out=./packaged/",
@@ -36,6 +37,7 @@
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "classnames": "^2.2.6",
+    "minimist": "^1.2.0",
     "portscanner": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

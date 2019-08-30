@@ -1,3 +1,5 @@
+console.time('electron-start');
+
 const electron = require('electron');
 const { app, BrowserWindow, Menu } = electron;
 let mainWnd = null;
@@ -5,6 +7,7 @@ let mainWnd = null;
 const SocketServer = require('wsbash-node-server');
 const SocketClient = require('wsbash-node-client');
 const PortTest = require('portscanner');
+const processArgs = require('minimist')(process.argv.slice(2));
 
 const registerSocketServer = require('./socketBridge');
 const dialogConfig = require('./configs/dialog');
@@ -25,7 +28,9 @@ app.on('ready', ()=>{
       mainWnd.on('ready-to-show', ()=>{
         Menu.setApplicationMenu(null);
         mainWnd.show();
-        mainWnd.webContents.openDevTools({ detach:true });
+        console.log(processArgs);
+        if(processArgs.dev) mainWnd.webContents.openDevTools({ detach:true });
+        console.timeEnd('electron-start');
       });
     
       mainWnd.on('closed', () => {
