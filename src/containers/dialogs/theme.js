@@ -1,15 +1,11 @@
-import { connect } from 'react-redux'
-
-import Theme from '../../components/dialog/theme';
-
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     ...state.views.theme,
     show: state.views.dialog.show === 'theme'
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+export const mapDispatchToProps = (dispatch, ownProps) => ({
   onClose: () => dispatch({
     type: 'views.dialog.reset'
   }),
@@ -22,8 +18,3 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     color
   })
 });
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Theme);

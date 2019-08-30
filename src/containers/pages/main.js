@@ -1,11 +1,7 @@
-export default {
-  mapStateToProps: (state) => {
-    return {
-      ...state.pages.picker,
-      open: state.views.drawer.show === ''
-    };
-  },
+export const mapStateToProps = (state) => ({
+  ...state.pages.picker,
+  open: state.views.drawer.show === 'main'
+});
 
-  mapDispatchToProps: (dispatch, ownProps) => ({
-  })
-}
+export const mapDispatchToProps = (dispatch, ownProps) => ({
+});

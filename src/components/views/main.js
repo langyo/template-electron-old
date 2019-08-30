@@ -6,54 +6,26 @@ import { withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
 import { Window, TitleBar } from 'react-desktop/windows';
 
-import AboutDialog from '../../containers/dialog/about';
-import ThemeDialog from '../../containers/dialog/theme';
-import SettingDialog from '../../containers/dialog/setting';
-
 import Fab from '../../containers/views/fab';
 import Drawer from '../../containers/views/drawer';
 
 import { connect } from 'react-redux';
 
-const requireComponentsFunc = require.context('../pages', true, /\.js$/);
-let components =  {};
-const requireContainersFunc = require.context('../../containers/pages', true, /\.js$/);
-let containers = {};
-
-requireComponentsFunc.keys().forEach(key => {
-  let path = /^\.\/(.*)\.js$/.exec(key)[1].split('/');
-  const dfs = obj => {
-    let head = path.shift();
-    if (path.length > 0) {
-      if (obj[head]) obj[head] = dfs(obj[head]);
-      else obj[head] = dfs({});
-    } else {
-      obj[head] = requireComponentsFunc(key);
-    }
-    return obj;
-  }
-  components = dfs(components);
-});
-
-requireContainersFunc.keys().forEach(key => {
-  let path = /^\.\/(.*)\.js$/.exec(key)[1].split('/');
-  const dfs = obj => {
-    let head = path.shift();
-    if (path.length > 0) {
-      if (obj[head]) obj[head] = dfs(obj[head]);
-      else obj[head] = dfs({});
-    } else {
-      obj[head] = requireContainersFunc(key);
-    }
-    return obj;
-  }
-  containers = dfs(containers);
-});
+import components from '../../components';
+import containers from '../../containers';
 
 let pages = {};
-Object.keys(containers).forEach(key => 
-  pages[key] = connect(containers[key].mapStateToProps, containers[key].mapDispatchToProps)
-  (components[key].default)
+Object.keys(containers.pages).forEach(key => 
+  pages[key] = React.createElement(
+  connect(containers.pages[key].mapStateToProps, containers.pages[key].mapDispatchToProps)
+  (components.pages[key].default), { key })
+);
+
+let dialogs = {};
+Object.keys(containers.dialogs).forEach(key => 
+  dialogs[key] = React.createElement(
+  connect(containers.dialogs[key].mapStateToProps, containers.dialogs[key].mapDispatchToProps)
+  (components.dialogs[key].default), { key })
 );
 
 const styles = theme => ({
@@ -88,15 +60,13 @@ class Main extends React.Component {
                   style={{ zIndex: 10000 }} />
         <MuiThemeProvider theme={this.props.theme}>
           {/* Dialogs */}
-          <AboutDialog />
-          <ThemeDialog />
-          <SettingDialog />
+            {Object.keys(dialogs).map(key => dialogs[key])}
           {/* Views*/}
           <Fab />
           <Drawer />
           {/* Pages */}
           <div className={classes.main}>
-            {React.createElement(pages[this.props.page])}
+            {pages[this.props.page]}
           </div>
         </MuiThemeProvider>
       </Window>
