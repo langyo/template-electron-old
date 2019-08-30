@@ -32,9 +32,9 @@ module.exports = {
     port: 16000
   },
   
-  plugins: [
-    new webpack.ExternalsPlugin('commonjs', [
-      'electron'
-    ])
-  ]
+  // plugins: [
+  //   new webpack.ExternalsPlugin('commonjs', [
+  //     'electron'
+  //   ])
+  // ]
 };

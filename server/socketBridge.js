@@ -1,10 +1,6 @@
+const events = require('./configs/socketEvents');
+
 module.exports = (server, client) => new Promise(resolve => {
-  let events = [
-    'account.verify',
-    'account.login',
-    'account.register'
-  ];
-  
   client.onOpen(() => {
     // Electron 渲染进程 -> Electron 主进程 -> 服务器
     events.forEach(n => server.register(n, obj => client.send({ ...obj, type: 'execute' })));
