@@ -1,4 +1,5 @@
 import initStore from './configs/initStore';
+import socket from './socket';
 
 const requireFunc = require.context('./reducers', true, /\.js$/);
 let reducers = {};
@@ -45,7 +46,6 @@ export default (state, action) => {
   let reducer = get(reducers, path);
 
   // Run the reducer.
-  console.log(reducer);
-  if (reducer) return merge(state, reducer.default(state, action));
+  if (reducer) return merge(state, reducer.default(state, action, socket));
   else return state;
 };

@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/langyo/kelp#readme",
   "scripts": {
-    "start": "electron ./index.js",
+    "start": "electron ./server/index.js",
     "watch": "webpack-dev-server --config ./webpack.config.js",
     "build": "webpack --config ./webpack.config.js",
     "package": "electron-packager ./ ReactDesktop --all --overwrite --out=./packaged/",
