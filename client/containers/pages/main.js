@@ -1,7 +1,8 @@
 export const mapStateToProps = (state) => ({
-  ...state.pages.picker,
+  ...state.pages.main,
   open: state.views.drawer.show === 'main'
 });
 
 export const mapDispatchToProps = (dispatch, ownProps) => ({
+  onGenerate: () => dispatch({ type: 'pages.main.test' })
 });

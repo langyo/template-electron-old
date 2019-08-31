@@ -35,16 +35,12 @@ export default {
       hasLogin: false,
       name: '',
       level: ''
-    }
+    },
+    clipboard: '未接受到数据'
   },
   pages: {
-    picker: {
-      nowSelectingLuckyGuy: '点击开始',
-      nowSelectingGroup: '',
-      nowSelectingGroupType: '',
-      nowSelectingClass: '',
-      working: false,
-      score: 0
+    main: {
+      text: 'test'
     }
   }
 };

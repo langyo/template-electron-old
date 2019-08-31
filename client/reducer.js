@@ -46,6 +46,8 @@ export default (state, action) => {
   let reducer = get(reducers, path);
 
   // Run the reducer.
-  if (reducer) return merge(state, reducer.default(state, action, socket));
+  let ret = reducer.default(state, action, socket);
+  if (typeof reducer === 'function') return ret;
+  if (reducer) return merge(state, ret);
   else return state;
 };

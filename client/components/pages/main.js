@@ -7,14 +7,18 @@ import Fade from '@material-ui/core/Fade';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
 });
 
 class Message extends React.Component {
   static propTypes = {
+    // Dispatcher
+    onGenerate: PropTypes.func,
     // State
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    text: PropTypes.string
   };
 
   render() {
@@ -24,8 +28,9 @@ class Message extends React.Component {
       <Fade in={this.props.open}>
         <div>
           <Paper>
-            <Typography variant='h3'>
-              {'Hello world!'}
+            <Button variant='outlined' onClick={this.props.onGenerate}>生成随机字符</Button>
+            <Typography variant='h6'>
+              {this.props.text}
             </Typography>
           </Paper>
         </div>

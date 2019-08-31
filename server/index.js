@@ -5,7 +5,6 @@ const { app, BrowserWindow, Menu } = electron;
 let mainWnd = null;
 
 const SocketServer = require('wsbash-node-server');
-const SocketClient = require('wsbash-node-client');
 const PortTest = require('portscanner');
 const processArgs = require('minimist')(process.argv.slice(2));
 
@@ -16,10 +15,9 @@ let server, client, port;
 
 app.on('ready', ()=>{
   PortTest.findAPortNotInUse(4097, 32768, 'localhost', function(error, p) {
-    if(error) console.error(error);
+    if(error) console.error(error), process.exit();
     port = p;
     server = new SocketServer(port);
-    client = new SocketClient('ws://localhost:9233');
     registerSocketServer(server, client).then(() => {
       mainWnd = new BrowserWindow(dialogConfig);
     
@@ -28,7 +26,6 @@ app.on('ready', ()=>{
       mainWnd.on('ready-to-show', ()=>{
         Menu.setApplicationMenu(null);
         mainWnd.show();
-        console.log(processArgs);
         if(processArgs.dev) mainWnd.webContents.openDevTools({ detach:true });
         console.timeEnd('electron-start');
       });

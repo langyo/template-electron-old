@@ -1,17 +1,7 @@
 {
-  "name": "template",
-  "version": "0.1.0",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/langyo/kelp.git"
-  },
   "author": "langyo",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/langyo/kelp/issues"
-  },
-  "homepage": "https://github.com/langyo/kelp#readme",
   "scripts": {
     "start": "electron ./server/index.js",
     "start:dev": "electron ./server/index.js --dev",
